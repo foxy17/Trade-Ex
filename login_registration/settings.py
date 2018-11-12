@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'login_registration.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'oskybqjl',
-        'USER': 'oskybqjl',
-        'PASSWORD': 'tCe8-nKB_3tXn2XMQKGuhuc59LMcRXxg',
+        'NAME': 'jdrjcopu',
+        'USER': 'jdrjcopu',
+        'PASSWORD': 'OcZTfws3QxpQ3b2pFrCHDXlCy9tdz0FX',
         'HOST': 'stampy.db.elephantsql.com',
         'PORT': '5432',
     }

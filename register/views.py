@@ -11,33 +11,33 @@ def home_page(request):
     }
     if request.user.is_authenticated():
         context["premium_content"] = "Yeaaahhh"
-    return render(request, "home_page.html", context)
+    return render(request, "register/index.html", context)
 
 
-def about_page(request):
-    context = {
-        "title": "about page !",
-        "content": "This is about page"
-    }
-    return render(request, "carousel/bspart1.html", context)
+# def about_page(request):
+#     context = {
+#         "title": "about page !",
+#         "content": "This is about page"
+#     }
+#     return render(request, "carousel/bspart1.html", context)
 
 
-def contact_page(request):
-    contact_form = ContactForm(request.POST or None)
-    context = {
-        "title": "contact page !",
-        "content": "This is contact page",
-        "form": contact_form,
-        "brand": "Contact"
-    }
-    if contact_form.is_valid():
-        print(contact_form.cleaned_data)
-    # if request.method=="POST":
-    # 	print(request.POST)
-    # 	print(request.POST.get('full_name'))
-    # 	print(request.POST.get('email'))
-    # 	print(request.POST.get('content'))
-    return render(request, "contact/view.html", context)
+# def contact_page(request):
+#     contact_form = ContactForm(request.POST or None)
+#     context = {
+#         "title": "contact page !",
+#         "content": "This is contact page",
+#         "form": contact_form,
+#         "brand": "Contact"
+#     }
+#     if contact_form.is_valid():
+#         print(contact_form.cleaned_data)
+#     # if request.method=="POST":
+#     # 	print(request.POST)
+#     # 	print(request.POST.get('full_name'))
+#     # 	print(request.POST.get('email'))
+#     # 	print(request.POST.get('content'))
+#     return render(request, "contact/view.html", context)
 
 
 def login_page(request):
@@ -63,7 +63,7 @@ def login_page(request):
         else:
             # return an 'invalid login' error message
             print("Error")
-    return render(request, "auth/login.html", context)
+    return render(request, "register/login.html", context)
 
 
 User = get_user_model()

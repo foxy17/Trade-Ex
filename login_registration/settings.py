@@ -76,11 +76,15 @@ WSGI_APPLICATION = 'login_registration.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'oskybqjl',
+        'USER': 'oskybqjl',
+        'PASSWORD': 'tCe8-nKB_3tXn2XMQKGuhuc59LMcRXxg',
+        'HOST': 'stampy.db.elephantsql.com',
+        'PORT': '5432',
     }
 }
-
+LOGIN_REDIRECT_URL = '/'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

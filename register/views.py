@@ -1,35 +1,84 @@
-from django.shortcuts import render, HttpResponse, redirect
-from django.contrib import messages
-import bcrypt
-from register.models import User
+from django.contrib.auth import authenticate, login, get_user_model
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from .forms import ContactForm, LoginForm, RegisterForm
 
-def index(request):
-    return render(request, 'register/index.html')
 
-def register(request):
-    errors = User.objects.validator(request.POST)
-    if len(errors):
-        for tag, error in errors.iteritems():
-            messages.error(request, error, extra_tags=tag)
-        return redirect('/')
-
-    hashed_password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
-    user = User.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], password=hashed_password, email=request.POST['email'])
-    user.save()
-    request.session['id'] = user.id
-    return redirect('/success')
-
-def login(request):
-    if (User.objects.filter(email=request.POST['login_email']).exists()):
-        user = User.objects.filter(email=request.POST['login_email'])[0]
-        if (bcrypt.checkpw(request.POST['login_password'].encode(), user.password.encode())):
-            request.session['id'] = user.id
-            return redirect('/success')
-    return redirect('/')
-
-def success(request):
-    user = User.objects.get(id=request.session['id'])
+def home_page(request):
     context = {
-        "user": user
+        "title": "Hello World !",
+        "content": "This is home page"
     }
-    return render(request, 'register/success.html', context)
+    if request.user.is_authenticated():
+        context["premium_content"] = "Yeaaahhh"
+    return render(request, "home_page.html", context)
+
+
+def about_page(request):
+    context = {
+        "title": "about page !",
+        "content": "This is about page"
+    }
+    return render(request, "carousel/bspart1.html", context)
+
+
+def contact_page(request):
+    contact_form = ContactForm(request.POST or None)
+    context = {
+        "title": "contact page !",
+        "content": "This is contact page",
+        "form": contact_form,
+        "brand": "Contact"
+    }
+    if contact_form.is_valid():
+        print(contact_form.cleaned_data)
+    # if request.method=="POST":
+    # 	print(request.POST)
+    # 	print(request.POST.get('full_name'))
+    # 	print(request.POST.get('email'))
+    # 	print(request.POST.get('content'))
+    return render(request, "contact/view.html", context)
+
+
+def login_page(request):
+    form = LoginForm(request.POST or None)
+    context = {
+        "form": form
+    }
+    print("User logged in :")
+    # print(request.user.is_authenticated())
+    if form.is_valid():
+        print(form.cleaned_data)
+        username = form.cleaned_data.get("username")
+        password = form.cleaned_data.get("password")
+        user = authenticate(request, username=username, password=password)
+        print(user)
+        # print(request.user.is_authenticated())
+        if user is not None:
+            # print(request.user.is_authenticated())
+            login(request, user)
+            # return to success page
+            # context['form']=LoginForm()
+            return redirect("/login")
+        else:
+            # return an 'invalid login' error message
+            print("Error")
+    return render(request, "auth/login.html", context)
+
+
+User = get_user_model()
+
+
+def register_page(request):
+    form = RegisterForm(request.POST or None)
+    context = {
+        "form": form
+    }
+
+    if form.is_valid():
+        print(form.cleaned_data)
+        username = form.cleaned_data.get("username")
+        email = form.cleaned_data.get("email")
+        password = form.cleaned_data.get("password")
+        new_user = User.objects.create_user(username, email, password)
+        print(new_user)

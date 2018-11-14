@@ -55,7 +55,7 @@ ROOT_URLCONF = 'login_registration.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,10 +75,16 @@ WSGI_APPLICATION = 'login_registration.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'jdrjcopu',
+            'USER': 'jdrjcopu',
+            'PASSWORD': 'OcZTfws3QxpQ3b2pFrCHDXlCy9tdz0FX',
+            'HOST': 'stampy.db.elephantsql.com',
+            'PORT': '5432',
+        }
+
 }
 
 
@@ -117,5 +123,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'assets'),
+]

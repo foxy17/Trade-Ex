@@ -15,6 +15,9 @@
 				<div class="alert alert-success" role="alert'">
 					<h4 class="alert-heading">Success</h4>
                         <p>Welcome, <strong>{{user.first_name}} {{user.last_name}}</strong></p>
+                    {% if user.is_authenticated %}
+                    logged in
+                    {% endif %}
 				</div>
 			</div>
 		</div>

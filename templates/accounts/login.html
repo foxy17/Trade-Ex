@@ -138,15 +138,15 @@ span.psw {
     
 
 
-  <form method="post" >
-  <form class="modal-content animate" >
+
+  <form method = "post" class="modal-content animate" >
     <div class="imgcontainer">
       
       <img src={% static "assets/images/img_avatar2.png" %}alt="Avatar" class="avatar">
     </div>
 
     <div class="container">
-     <form method="post" action="/login">
+     <form method="post" >
  {% csrf_token %}
                             <div class="form-group">
                                 <label>Email</label>
@@ -162,7 +162,7 @@ span.psw {
                         </form>
     </div>
   </form>
-  </form>
+
       <div class="container" style="background-color:#f1f1f1">
           <a href="index.html"><button type="button" class="cancelbtn">Cancel</button></a>
 

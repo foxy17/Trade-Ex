@@ -1,9 +1,9 @@
 
-from django.utils import timezone
+
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, HttpResponse, redirect, render_to_response
 from django.contrib import messages
-import bcrypt
+
 from .models import User
 
 def list(request):

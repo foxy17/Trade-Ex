@@ -3881,12 +3881,16 @@
 					<h1><a href="index.html">TRADE-EX</a></h1>
 					<nav id="nav">
 						<ul>
-							<li><a href="index.html">Home</a></li>
+							<li><a href="{% url 'accounts:index' %}">Home</a></li>
+                            <li><a href="{% url 'create_post' %}">Post  {{ user.username }}</a></li>
+
 							<li>
 								<a href="#" class="icon fa-angle-down">Layouts</a>
 								<ul>
-									<li><a href="generic.html">Generic</a></li>
-									<li><a href="contact.html">Contact</a></li>
+
+
+									<li><a href="{% url 'create_post' %}">Post</a></li>
+									<li><a href="{% url 'accounts:logout' %}">Logout</a></li>
 									<li><a href="elements.html">Elements</a></li>
 									<li>
 										<a href="#">Submenu</a>
@@ -3899,7 +3903,11 @@
 									</li>
 								</ul>
 							</li>
+                            {%  if user.is_authenticated %}
+                            <li> <a href="{% url 'accounts:logout' %}" class="button">Logout</a></li>
+                            {% else %}
 							<li><a href="{% url 'accounts:login' %}" class="button">Login</a></li>
+                            {% endif %}
 						</ul>
 					</nav>
 				</header>
@@ -3909,8 +3917,11 @@
 					<h2>TRADE-EX</h2>
 					<p>ONLINE TRADING PORTAL</p>
 					<ul class="actions special">
-
+                        {%  if user.is_authenticated %}
+                            <li><a href="{% url 'accounts:register' %}" class="button primary">Post AD</a></li>
+                        {% else %}
 						<li><a href="{% url 'accounts:register' %}" class="button primary">Sign Up</a></li>
+                        {% endif %}
 						<li><a href="#" class="button">Learn More</a></li>
 					</ul>
                     

@@ -2,13 +2,12 @@ from __future__ import unicode_literals
 
 from django.db.models.signals import pre_save
 from django.utils import timezone
-from django.contrib.contenttypes import forms
-from django.contrib.postgres.fields import ArrayField
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from slugify import slugify
 
-from apps.register.models import User
+
 def upload_location(instance, filename):
     #filebase, extension = filename.split(".")
     #return "%s/%s.%s" %(instance.id, instance.id, extension)
@@ -25,11 +24,10 @@ def upload_location(instance, filename):
 
 
 class PostQuerySet(models.query.QuerySet):
-    def not_draft(self):
-        return self.filter(draft=False)
+
 
     def published(self):
-        return self.filter(publish__lte=timezone.now()).not_draft()
+        return self.filter(publish__lte=timezone.now())
 
 
 class PostManager(models.Manager):
@@ -42,7 +40,7 @@ class PostManager(models.Manager):
 
 
 class Post (models.Model):
-    user=models.ForeignKey(User,default=1)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
     title=models.CharField(blank=False,default='.',max_length=50)
     choices=(
     ('Electronics', 'Electronics'),
@@ -51,20 +49,21 @@ class Post (models.Model):
     ('Others','Others')
 )
     price=models.IntegerField(blank=False,default=0)
-    tags = ArrayField(
-        models.CharField(choices=choices, max_length=2, blank=False, default='Others'),
-    )
+    tag=models.CharField(choices=choices, max_length=20, blank=False, default='Others')
+
     image = models.ImageField(upload_to=upload_location,
                               null=True,
                               blank=True,
-                              width_field="width_field",
-                              height_field="height_field")
+
+                             )
     description=models.TextField(blank=False,default='no descripiton')
     slug = models.SlugField(unique=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
-    final=title + str(price)
-    draft = models.BooleanField(default=False)
+
+    content = models.TextField()
+
+
     objects=PostManager()
 
     def __unicode__(self):

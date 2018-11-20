@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-
+{% load thumbnail %}
 
 <div class='col-sm-6 col-sm-offset-3'>
     <h1>{{ title }}</h1>
@@ -10,13 +10,19 @@
 </form>
 {% if object_list is null %}
 NO items
-{% elif %}
+{% else %}
+
 {% for obj in object_list %}
 <div class="row">
   <div class="col-sm-12">
     <div class="thumbnail">
-        {% if obj.image %}
-         <img src='{{ obj.image.url }}' class='img-responsive' />
+
+        {% if obj.media %}
+
+             {% thumbnail obj.media "200x200" as im %}
+            <img src="{{ im.url }}">
+            {% endthumbnail %}
+
         {% endif %}
       <div class="caption">
         {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}

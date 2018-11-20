@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
@@ -79,10 +80,10 @@ DATABASES = {
 
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'jdrjcopu',
-            'USER': 'jdrjcopu',
-            'PASSWORD': 'OcZTfws3QxpQ3b2pFrCHDXlCy9tdz0FX',
-            'HOST': 'stampy.db.elephantsql.com',
+            'NAME': 'wrvoejff',
+            'USER': 'wrvoejff',
+            'PASSWORD': 'bojKgZt9aEzJ_fyCKpxNhnxsni2KqVp2',
+            'HOST': 'elmer.db.elephantsql.com',
             'PORT': '5432',
         }
 
@@ -132,3 +133,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(os.path.dirname(__file__), 'static').replace('\\','/'),
 )
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+MEDIA_URL = '/media/'
+BASE_URL = 'list/'

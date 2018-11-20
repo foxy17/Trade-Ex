@@ -1,29 +1,29 @@
 from django import forms
 from django.forms import RadioSelect, Select
 
-from .models import Post
+from .models import Products
 
 
 class PostForm(forms.ModelForm):
 
     class Meta:
-        model =Post
+        model =Products
         choices = (
             ('Electronics', 'Electronics'),
             ('Books', 'Books'),
             ('Services', 'Services'),
             ('Others', 'Others')
         )
-        fields = (
+        fields = [
             "title",
-            "content",
-            "image",
+            "description",
+            "media",
             "tag",
             "price"
 
 
 
-    )
+    ]
         widgets = {
             "tag": Select(choices=choices),
         }

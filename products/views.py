@@ -1,3 +1,5 @@
+from login_registration.settings import BASE_URL
+
 try:
     from urllib.parse import quote_plus
 except:
@@ -12,7 +14,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
 from .forms import PostForm
-from .models import Post
+from .models import Products
+
 
 
 def post_create(request):
@@ -24,12 +27,13 @@ def post_create(request):
         print(instance.user.email)
         instance.save()
         # message success
+        print('saved')
         messages.success(request, "Successfully Created")
-        return HttpResponseRedirect(instance.get_absolute_url())
+        return redirect('index')
     context = {
         "form": form,
     }
-    return render(request, "Post/post_formnew.html", context)
+    return render(request, "Post/post_form.html", context)
 
 
 class PostDetailView(DetailView):
@@ -37,7 +41,7 @@ class PostDetailView(DetailView):
 
     def get_object(self, *args, **kwargs):
         slug = self.kwargs.get("slug")
-        instance = get_object_or_404(Post, slug=slug)
+        instance = get_object_or_404(Products, slug=slug)
         return instance
 
     def get_context_data(self, *args, **kwargs):
@@ -51,20 +55,20 @@ class PostDetailView(DetailView):
 
 
 def post_detail(request, slug=None):
-    instance = get_object_or_404(Post, slug=slug)
+    instance = get_object_or_404(Products, slug=slug)
 
-    share_string = quote_plus(instance.content)
+
     context = {
         "title": instance.title,
         "instance": instance,
-        "share_string": share_string,
+
     }
     return render(request, "Post/post_detail.html", context)
 
 
 def post_list(request):
     today = timezone.now().date()
-    queryset_list = Post.objects.active()  # .order_by("-timestamp")
+    queryset_list = Products.objects.all()
 
     # queryset_list = Post.objects.all()
 
@@ -99,7 +103,7 @@ def post_list(request):
 
 
 def post_update(request, slug=None):
-    instance = get_object_or_404(Post, slug=slug)
+    instance = get_object_or_404(Products, slug=slug)
     form = PostForm(request.POST or None, request.FILES or None, instance=instance)
     if form.is_valid():
         instance = form.save(commit=False)
@@ -116,7 +120,7 @@ def post_update(request, slug=None):
 
 
 def post_delete(request, slug=None):
-    instance = get_object_or_404(Post, slug=slug)
+    instance = get_object_or_404(Products, slug=slug)
     instance.delete()
     messages.success(request, "Successfully deleted")
     return redirect("posts:list")

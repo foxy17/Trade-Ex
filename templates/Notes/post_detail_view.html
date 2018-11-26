@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% load thumbnail %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ {% for img in object.image_set.all %}
+    {% thumbnail img.file "x800" as im %}
+         <img src="{{ im.url }}">
+ {% endthumbnail %}
+  {% endfor %}
+</body>
+</html>

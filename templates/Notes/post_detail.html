@@ -1,30 +1,38 @@
 
 {% load static %}
-
+{% load thumbnail %}
 {% block head_title %}
-{{title }}
+
 {% endblock head_title %}
 
 
 
 {% block content %}
 <div class='col-sm-6 col-sm-offset-3'>
-    {% if instance.media %}
-    <img src='{{ instance.media.url }}' class='img-fluid' />
-    {% endif %}
-        {% for field in pic %}
-{#             {% thumbnail images "200x200" as im %}#}
 
-            <img src="{{ field.instance}}">
-        {% endfor %}
-<h1>{{ instance.title }} <small>{{ instance.publish }}</small></h1>
+
+<h1>{{ instance.topic }} </h1>
 
 <p>Author: {{ instance.user.get_username}}</p>
 
 
+     {% thumbnail instance.image1 "x500" as im %}
+         <img src="{{ im.url }}">
+     {% endthumbnail %} <br>
+    {% thumbnail instance.image "x500" as im %}
+         <img src="{{ im.url }}">
+     {% endthumbnail %} <br>
+    {% thumbnail instance.image2 "x500" as im %}
+         <img src="{{ im.url }}">
+     {% endthumbnail %} <br>
+    {% thumbnail instance.image3 "x500" as im %}
+         <img src="{{ im.url }}">
+     {% endthumbnail %} <br>
 
-<a href="{% url "pinax_messages:message_user_create" user_id=instance.user.id %}" class="btn btn-default">Message {{ instance.user.username }}</a>
-sadadsadas
+
+
+
+
 
 <div class='row'>
 <div class='col-sm-12'>

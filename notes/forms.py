@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import RadioSelect, Select
 
-from .models import Notes,NoteImages
+from .models import Notes
 
 class NoteForm(forms.ModelForm):
 
@@ -17,6 +17,10 @@ class NoteForm(forms.ModelForm):
             "subject",
             "topic",
             "notes",
+            "image",
+            "image1",
+            "image2",
+            "image3",
 
 
         ]
@@ -24,11 +28,3 @@ class NoteForm(forms.ModelForm):
             "subject": Select(choices=choices),
         }
 
-
-class ImageForm(forms.ModelForm):
-
-    class Meta:
-        model = NoteImages
-        fields = ('image', )
-    def geturl(self):
-        return self.image

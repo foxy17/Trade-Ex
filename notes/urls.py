@@ -13,10 +13,11 @@ post_detail,
     post_update,
     post_delete,
 
+
 )
 app_name='notes'
 urlpatterns = [
-    path('', post_list, name='index'),
+    path('', post_list, name='index1'),
     path('create', post_create,name='create_post'),
 
     re_path(r'^(?P<slug>[\w-]+)/$', post_detail, name='detail'),

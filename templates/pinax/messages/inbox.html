@@ -1,0 +1,13 @@
+{% for thread in threads %}
+    Message from  {{  thread.latest_message.sender}}
+    <div class="chat-box">
+   subject : {{ thread.subject }}
+        <div>message :{{ thread.latest_message.content|truncatewords:5 }} </div>
+</div>
+    <a href="{% url "pinax_messages:message_user_create" user_id=thread.latest_message.sender_id %}" class="btn btn-default">reply</a>
+{% endfor %}
+    <div>
+{% for message in threads.messages.all %}
+    {{ message.sender }} -- {{ message.content }}
+{% endfor %}
+</div>

@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, re_path
 
-from login_registration import settings
+from main import settings
 from .views import (
     post_list,
 
@@ -12,7 +12,7 @@ from .views import (
 post_detail,
     post_update,
     post_delete,
-    PostDetailView
+
 )
 
 urlpatterns = [

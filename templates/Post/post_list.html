@@ -1,7 +1,8 @@
-{% extends "base.html" %}
+
 {% block content %}
 {% load thumbnail %}
-
+    {% load static %}
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
 <div class='col-sm-6 col-sm-offset-3'>
     <h1>{{ title }}</h1>
 <form method='GET' action=''>
@@ -25,8 +26,8 @@ NO items
 
         {% endif %}
       <div class="caption">
-        {% if obj.draft %}<h3>Staff only: Draft</h3>{% endif %} {% if obj.publish > today %}<h3>Staff Only: Future Post</h3>{% endif %}
-        <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.publish }}</small></h3>
+
+        <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a> </h3>
         {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
         <p>{{ obj.content|linebreaks|truncatechars:120 }}</p>
         <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>

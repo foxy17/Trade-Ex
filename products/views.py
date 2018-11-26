@@ -1,4 +1,4 @@
-from login_registration.settings import BASE_URL
+from main.settings import BASE_URL
 
 try:
     from urllib.parse import quote_plus
@@ -24,6 +24,7 @@ def post_create(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.user = request.user
+
         print(instance.user.email)
         instance.save()
         # message success
@@ -36,22 +37,21 @@ def post_create(request):
     return render(request, "Post/post_form.html", context)
 
 
-class PostDetailView(DetailView):
-    template_name = 'Post/post_detail.html'
+# class PostDetailView(DetailView):
+#     template_name = 'Post/post_detail.html'
+#
+#     def get_object(self, *args, **kwargs):
+#         slug = self.kwargs.get("slug")
+#         instance = get_object_or_404(Products, slug=slug)
+#         return instance
+#
+#     def get_context_data(self, *args, **kwargs):
+#         context = super(PostDetailView, self).get_context_data(**kwargs)
+#         instance = context['object']
+#         context['share_string'] = quote_plus(instance.content)
+#         return context
+#
 
-    def get_object(self, *args, **kwargs):
-        slug = self.kwargs.get("slug")
-        instance = get_object_or_404(Products, slug=slug)
-        return instance
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(PostDetailView, self).get_context_data(**kwargs)
-        instance = context['object']
-        context['share_string'] = quote_plus(instance.content)
-        return context
-
-
-# in urls.py --> PostDetailView.as_view() instead of post_detail
 
 
 def post_detail(request, slug=None):
@@ -76,10 +76,9 @@ def post_list(request):
     if query:
         queryset_list = queryset_list.filter(
             Q(title__icontains=query) |
-            Q(content__icontains=query) |
-            Q(user__first_name__icontains=query) |
-            Q(user__last_name__icontains=query) |
-            Q(tags__iexact=query)
+            Q(description__icontains=query)
+
+
         ).distinct()
     paginator = Paginator(queryset_list, 8)  # Show 25 contacts per page
     page_request_var = "page"

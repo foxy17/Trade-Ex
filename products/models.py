@@ -8,14 +8,17 @@ from django.db.models.signals import pre_save, post_save
 
 from django.contrib.auth.models import User
 from django.db import models
-from django.urls import reverse
-from slugify import slugify
+
+
+
+
 def download_media_location(instance, filename):
     return "%s/%s" %(instance.slug, filename)
 
 
 class Products(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
+
+    user=models.ForeignKey(User,on_delete=models.PROTECT)
     title=models.CharField(blank=False,default='.',max_length=50)
     choices=(
     ('Electronics', 'Electronics'),

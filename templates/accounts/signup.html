@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load crispy_forms_filters %}
 <html>
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
@@ -130,12 +131,12 @@ hr {
       <p>Please fill in this form to create an account.</p>
       <hr> <div class="form-group">
       {% for field in uform.visible_fields %}
-    {{ field.label }}
-    {{ field }}
+
+    {{ field|as_crispy_field }}
     {% endfor %}
       {% for field in pform.visible_fields %}
-    {{ field.label }}
-    {{ field }}
+
+    {{ field|as_crispy_field }}
 {% endfor %}
     </div>
 {#      <div class="form-group">#}

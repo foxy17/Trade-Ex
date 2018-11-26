@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_filters %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{% static '/assets/css/main.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="box">
+<div class="center">
+<form method="post">
+{{ uform|crispy }}
+    {{ pform|crispy }}
+    <button type="submit" class="button">Sign Up</button>
+
+</form></div></div>
+</body>
+</html>

@@ -7,6 +7,6 @@ urlpatterns = [
     path('register/', views.register,name='register'),
     path('success/', views.success),
     path('login/', views.user_login,name='login'),
-    path('list/', views.list),
+
     path('logout/', views.user_logout, name ='logout')
 ]

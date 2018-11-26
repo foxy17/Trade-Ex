@@ -1,84 +1,57 @@
-/*
-	Alpha by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
 
-(function($) {
+(function ($) {
+    "use strict";
 
-	var	$window = $(window),
-		$body = $('body'),
-		$header = $('#header'),
-		$banner = $('#banner');
+    
+    /*==================================================================
+    [ Validate ]*/
+    var input = $('.validate-input .input100');
 
-	// Breakpoints.
-		breakpoints({
-			wide:      ( '1281px',  '1680px' ),
-			normal:    ( '981px',   '1280px' ),
-			narrow:    ( '737px',   '980px'  ),
-			narrower:  ( '737px',   '840px'  ),
-			mobile:    ( '481px',   '736px'  ),
-			mobilep:   ( null,      '480px'  )
-		});
+    $('.validate-form').on('submit',function(){
+        var check = true;
 
-	// Play initial animations on page load.
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
-		});
+        for(var i=0; i<input.length; i++) {
+            if(validate(input[i]) == false){
+                showValidate(input[i]);
+                check=false;
+            }
+        }
 
-	// Dropdowns.
-		$('#nav > ul').dropotron({
-			alignment: 'right'
-		});
+        return check;
+    });
 
-	// NavPanel.
 
-		// Button.
-			$(
-				'<div id="navButton">' +
-					'<a href="#navPanel" class="toggle"></a>' +
-				'</div>'
-			)
-				.appendTo($body);
+    $('.validate-form .input100').each(function(){
+        $(this).focus(function(){
+           hideValidate(this);
+        });
+    });
 
-		// Panel.
-			$(
-				'<div id="navPanel">' +
-					'<nav>' +
-						$('#nav').navList() +
-					'</nav>' +
-				'</div>'
-			)
-				.appendTo($body)
-				.panel({
-					delay: 500,
-					hideOnClick: true,
-					hideOnSwipe: true,
-					resetScroll: true,
-					resetForms: true,
-					side: 'left',
-					target: $body,
-					visibleClass: 'navPanel-visible'
-				});
+    function validate (input) {
+        if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
+            if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+                return false;
+            }
+        }
+        else {
+            if($(input).val().trim() == ''){
+                return false;
+            }
+        }
+    }
 
-	// Header.
-		if (!browser.mobile
-		&&	$header.hasClass('alt')
-		&&	$banner.length > 0) {
+    function showValidate(input) {
+        var thisAlert = $(input).parent();
 
-			$window.on('load', function() {
+        $(thisAlert).addClass('alert-validate');
+    }
 
-				$banner.scrollex({
-					bottom:		$header.outerHeight(),
-					terminate:	function() { $header.removeClass('alt'); },
-					enter:		function() { $header.addClass('alt reveal'); },
-					leave:		function() { $header.removeClass('alt'); }
-				});
+    function hideValidate(input) {
+        var thisAlert = $(input).parent();
 
-			});
-
-		}
+        $(thisAlert).removeClass('alert-validate');
+    }
+    
+    
 
 })(jQuery);

@@ -10,8 +10,7 @@ from django.template import RequestContext
 
 from .models import User
 
-def list(request):
-    return render(request, 'products/list.html')
+
 def index(request):
     return render(request, 'index.html')
 
@@ -23,7 +22,9 @@ def register(request):
         uform = UserForm(data=request.POST)
         pform = UserProfileForm(data=request.POST)
         if uform.is_valid() and pform.is_valid():
+
             user = uform.save()
+
             # form brings back a plain text string, not an encrypted password
             pw = user.password
             # thus we need to use set password to encrypt the password string
@@ -33,14 +34,14 @@ def register(request):
             profile.user = user
             profile.save()
             registered = True
-            return redirect('/index')
+            return redirect('/')
         else:
             print(uform.errors, pform.errors)
     else:
         uform = UserForm()
         pform = UserProfileForm()
 
-    return render_to_response('accounts/signup.html', {'uform': uform, 'pform': pform, 'registered': registered}, RequestContext(request, {}))
+    return render_to_response('accounts/signupnew.html', {'uform': uform, 'pform': pform, 'registered': registered}, RequestContext(request, {}))
 
 
 # def register(request):
@@ -102,10 +103,10 @@ def user_login(request):
           else:
 
               print ( "invalid login details " + username + " " + password)
-              return render_to_response('accounts/login.html', {}, context)
+              return render_to_response('accounts/newlogin.html', {}, context)
     else:
 
-        return render_to_response('accounts/login.html', {}, context)
+        return render_to_response('accounts/newlogin.html', {}, context)
 
 def success(request):
     user = User.objects.get(id=request.session['id'])

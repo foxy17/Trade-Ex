@@ -28,4 +28,3 @@ class PostForm(forms.ModelForm):
             "tag": Select(choices=choices),
         }
 
-

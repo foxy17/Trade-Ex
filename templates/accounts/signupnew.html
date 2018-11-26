@@ -1,0 +1,116 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <link rel="stylesheet" href="{% static "assets/css/main.css" %}" />
+    <title>SIGN UP</title>
+    </head>
+    
+    <style>
+    body {
+    background-color: #1D101A 
+    }
+        .box {
+		background: #1D101A;
+		border-radius: 0px;
+		box-shadow: 0 2px 0 0 #e5e5e5;
+		margin: 10 10 8em 10;
+		padding: 5em;
+            
+	}
+        .center {
+    margin: auto;
+    width: 50%;
+    border-radius: 25px;
+    border: 3px solid #1f1108;
+    padding: 10px;
+     background-color: #EAE7DA;
+           
+            
+}
+        
+        
+        
+        
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+    
+@keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+}        
+    </style>
+<body>
+
+
+<div class="box animate">
+    <div class="center">
+        
+    
+  <form method="post"  class="modal-content">
+    <div class="container"><br>
+        <h1><b>SIGN UP</b></h1>
+      <p>Please fill in this form to create an account.</p>
+      <hr>
+        
+        <label for="Username"><b>Username</b></label>
+      {{ uform.username }}
+        
+        <label for="First Name"><b>First Name</b></label>
+      {{ pform.first_name }}
+        
+        <label for="Last Name"><b>Last Name</b></label>
+      {{ pform.last_name }}
+
+        
+        
+      <label for="email"><b>Email</b></label>
+      {{ uform.email }}
+
+      <label for="psw"><b>Password</b></label>
+      {{ uform.password }}
+
+
+
+      
+      <div class="clearfix">
+          <button type="submit" class="button">Sign Up</button>
+        <a href={% url "accounts:index" %}><button type="button" class="button">Cancel</button></a>
+        
+      </div>
+    </div>
+      
+    
+    
+  </form>
+    </div>
+    </div>
+
+
+    
+    
+
+</body>
+</html>
+

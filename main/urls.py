@@ -10,7 +10,7 @@ path('Post/', include('products.urls')) ,
 path('Notes/', include('notes.urls')) ,
     path('', include('apps.register.urls')),
 url(r"^messages/", include("pinax.messages.urls", namespace="pinax_messages")),
-
+url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()

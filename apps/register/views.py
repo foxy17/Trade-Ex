@@ -115,6 +115,9 @@ def success(request):
     }
     return render(request, 'register/success.html', context)
 
+# def user_profile:
+
+
 @login_required
 def user_logout(request):
     context = RequestContext(request)

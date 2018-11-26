@@ -42,10 +42,12 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'django.forms',
     'django.contrib.staticfiles',
- 'notes',
-"pinax.messages",
+    'notes',
+    "pinax.messages",
+    'star_ratings',
 
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -71,7 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                "pinax.messages.context_processors.user_messages"
+                "pinax.messages.context_processors.user_messages",
+
 
             ],
         },

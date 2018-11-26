@@ -1,5 +1,5 @@
 
-
+{% load static %}
 
 {% block head_title %}
 {{title }}
@@ -20,6 +20,7 @@
 <h1>{{ instance.title }} <small>{{ instance.publish }}</small></h1>
 
 <p>Author: {{ instance.user.get_username}}</p>
+
 
 
 <a href="{% url "pinax_messages:message_user_create" user_id=instance.user.id %}" class="btn btn-default">Message {{ instance.user.username }}</a>

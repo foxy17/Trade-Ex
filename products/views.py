@@ -1,3 +1,5 @@
+from apps.register.forms import RatingForm, UserForm
+from apps.register.models import Review
 from main.settings import BASE_URL
 
 try:
@@ -34,7 +36,7 @@ def post_create(request):
     context = {
         "form": form,
     }
-    return render(request, "Post/post_form.html", context)
+    return render(request, "Post/post.html", context)
 
 
 # class PostDetailView(DetailView):
@@ -56,14 +58,44 @@ def post_create(request):
 
 def post_detail(request, slug=None):
     instance = get_object_or_404(Products, slug=slug)
+    instance2=Review.objects.filter(user_name=instance.user.get_username())
 
+    l = 0
+    sum, i = 0, 0
+    for r in instance2:
+        l += (r.rating)
+        print(l)
+        i = i + 1
+    if (i == 0):
+        avg = "no rating"
+    else:
+        avg = l / i
 
-    context = {
-        "title": instance.title,
-        "instance": instance,
+    if(Review.objects.filter(user_name=instance.user.get_username())!=None ):
+        context = {
+            "title": instance.title,
+            "instance": instance,
+            "avg": avg,
 
-    }
-    return render(request, "Post/post_detail.html", context)
+        }
+        return render(request, "Post/post_detail.html", context)
+
+    else:
+        rating=RatingForm(request.POST or None)
+        rating.user_name=instance.user.get_username()
+        if rating.is_valid():
+            rate=rating.save(commit=False)
+            rate.user_name=instance.user.get_username()
+            print(rate.user_name)
+            rate.save()
+        context = {
+            "title": instance.title,
+            "instance": instance,
+            "form":rating,
+            "avg":avg,
+
+        }
+        return render(request, "Post/post_detail.html", context)
 
 
 def post_list(request):

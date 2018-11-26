@@ -1,6 +1,7 @@
 
-
-
+{% load static %}
+<head><link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script></head>
 {% block head_title %}
 {{title }}
 {% endblock head_title %}
@@ -19,6 +20,9 @@
 
 <a href="{% url "pinax_messages:message_user_create" user_id=instance.user.id %}" class="btn btn-default">Message {{ instance.user.username }}</a>
 
+{{ avg }}
+{% if form %}
+<form method="post">{{ form }} <input type="submit" value="Post">		</form>{% endif %}
 
 <div class='row'>
 <div class='col-sm-12'>

@@ -1,37 +1,64 @@
 
 {% load static %}
 <head><link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
-<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script></head>
-{% block head_title %}
-{{title }}
-{% endblock head_title %}
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+
+</head>
+<style>
+    body{
+        background-color: #FA824C;
+    }
+.center {
+    margin: auto;
+    width: 50%;
+
+    padding: 8px;
+}
+    .box {
+
+		border-radius: 6px;
+
+		margin: 50px 50px 2em 50px;
+		padding: 0em;
+	}
+
+</style>
 
 
 
+
+<div class="center">
 {% block content %}
 <div class='col-sm-6 col-sm-offset-3'>
     {% if instance.media %}
     <img src='{{ instance.media.url }}' class='img-fluid' />
     {% endif %}
-<h1>{{ instance.title }} <small>{{ instance.publish }}</small></h1>
+</div>
 
-<p>Author: {{ instance.user.get_username}}</p>
+<h1>Title:{{ instance.title }} </h1>
 
+    <div class="box">
+    <p><b>SELLER:</b></p>
+ {{ instance.user.get_username}}
+{% if instance.user.get_username == user.get_username %}
+    <a href="{% url 'del' instance.slug %}">Delete</a>
+    <a href="{% url 'update' instance.slug %}">Update</a>
+{% endif %}
 
 {#<a href="{% url "pinax_messages:message_user_create" user_id=instance.user.id %}" class="btn btn-default">Message {{ instance.user.username }}</a>#}
-
+    <p><b>RATING:</b></p>
 {{ avg }}
 {% if form %}
 <form method="post">{{ form }} <input type="submit" value="Post">		</form>{% endif %}
 
 <div class='row'>
 <div class='col-sm-12'>
-
+<p><b>DESCRIPTION:</b></p>
 {{ instance.description|linebreaks }}
 
 <hr/>
 <br/>
-
+</div>
 
 </div>
 </div>

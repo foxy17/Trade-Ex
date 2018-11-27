@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+
 from apps.register.forms import RatingForm, UserForm
 from apps.register.models import Review
 from main.settings import BASE_URL
@@ -154,4 +156,4 @@ def post_delete(request, slug=None):
     instance = get_object_or_404(Products, slug=slug)
     instance.delete()
     messages.success(request, "Successfully deleted")
-    return redirect("posts:list")
+    return redirect("index")

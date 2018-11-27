@@ -3,32 +3,96 @@
 {% load thumbnail %}
     {% load static %}
 <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+
+    <style>
+body{
+    background-color: #533B39;
+}
+.footer1 {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-left: 40%;
+}
+.centr1{
+    position: relative;
+    margin: auto;
+    width: 50%;
+
+    padding: 20px;
+
+}
+.box {
+		background: #ffffff;
+		border-radius: 6px;
+		box-shadow: 0 2px 0 0 #fff;
+		margin: 50px 50px 2em 50px;
+		padding: 3em;
+	}
+
+.col {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+}
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)}
+    to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
+}
+</style>
+
 <div class='col-sm-6 col-sm-offset-3'>
-    <h1>{{ title }}</h1>
+<div class="centr1">
 <form method='GET' action=''>
+
+    <div class="row gtr-uniform gtr-50">
+        <div class="col-9 col-12-mobilep">
 <input type='text' name='q' placeholder='Search posts' value='{{ request.GET.q }}'/>
-<input type='submit' value='Search' />
-</form>
+    </div>
+
+<div class="col-3 col-12-mobilep">
+<input type='submit' value='Search' class="fit" />
+</div></div>
+</form></div>
+
 {% if object_list is null %}
-NO items
+    <div class="box animate">
+    <div class="center">
+<div class="row">
+    <div class="col-sm-12">   <div class="caption"><p>NO items</p></div></div></div></div></div>
 {% else %}
 
 {% for obj in object_list %}
+    <div class="col">
+
+    <div class="box animate">
+    <div class="center">
+
 <div class="row">
   <div class="col-sm-12">
-      <div class="caption">
-        <h3><a href='{{ obj.get_absolute_url }}'>{{ obj.topic }}</a></h3>
-        {% if obj.user.get_full_name %}<p>Author: {{ obj.user.get_full_name }}</p>{% endif %}
-        <p>{{ obj.content|linebreaks|truncatechars:120 }}</p>
+      <b class="caption">
+        <h3><a href='{{ obj.get_absolute_url }}'>Topic :- {{ obj.topic }}</a></h3>
+        {% if obj.user.get_full_name %}<p><b>Author: {{ obj.user.get_full_name }}</p>{% endif %}
+          {{ obj.content|linebreaks|truncatechars:120 }}</b></p>
         <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
       </div>
     </div>
   </div>
-<hr/>
+        <hr/></div></div></div>
 </div>
 {% endfor %}
 
-
+<div class="footer1">
 <div class="pagination">
     <span class="step-links">
         {% if object_list.has_previous %}
@@ -42,9 +106,11 @@ NO items
         {% if object_list.has_next %}
             <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
         {% endif %}
+     <a href="{% url 'notes:home' %}">Notes  </a>
+    <a style="margin-left: 5px" href="{% url 'accounts:index' %}">      Home</a>
     </span>
 </div>
-
+</div>
 
 
 

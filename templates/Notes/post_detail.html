@@ -6,14 +6,23 @@
 {% endblock head_title %}
 
 
+<style>
+body{
+        background-color: #00563D
+    }
+    p {
+    font-family: "Times New Roman", Times, serif;
+}
+
+</style>
 
 {% block content %}
 <div class='col-sm-6 col-sm-offset-3'>
 
 
-<h1>{{ instance.topic }} </h1>
-
-<p>Author: {{ instance.user.get_username}}</p>
+<h1>Topic:{{ instance.topic }} </h1>
+    <p class="Times New Roman"><b>AUTHOR:</b><br>
+ {{ instance.user.get_username}}</p>
 
 
      {% thumbnail instance.image1 "x500" as im %}
@@ -39,7 +48,7 @@
 
 {{ instance.description|linebreaks }}
 
-<hr/>
+
 <br/>
 
 

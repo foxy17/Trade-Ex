@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
 
 from apps.register.forms import UserForm, UserProfileForm
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import  HttpResponseRedirect
 from django.shortcuts import render_to_response
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, HttpResponse, redirect, render_to_response
 from django.contrib import messages
 from django.template import RequestContext
@@ -83,7 +83,7 @@ def register(request):
 #         return render(request, 'accounts/login.html')
 
 
-from django.contrib.auth import authenticate, login, logout
+
 
 
 def user_login(request):

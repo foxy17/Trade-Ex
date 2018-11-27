@@ -17,32 +17,14 @@
 
 			<!-- Header -->
 				<header id="header" class="alt">
-					<h1><a href="index.html">TRADE-EX</a></h1>
+					<h1><a href="{% url "accounts:index"  %}">TRADE-EX</a></h1>
 					<nav id="nav">
 						<ul>
 							<li><a href="{% url 'accounts:index' %}">Home</a></li>
-                            <li><a href="{% url 'create_post' %}">Post  {{ user.username }}</a></li>
-                        <li><a href="{% url 'notes:create_post' %}">Post Notes  {{ user.username }}</a></li>
-
-							<li>
-								<a href="#" class="icon fa-angle-down">Layouts</a>
-								<ul>
+                            <li><a href="{% url 'index' %}">Products  </a></li>
+                        <li><a href="{% url 'notes:home' %}">View Notes </a></li>
 
 
-									<li><a href="{% url 'create_post' %}">Post</a></li>
-									<li><a href="{% url 'accounts:logout' %}">Logout</a></li>
-									<li><a href="elements.html">Elements</a></li>
-									<li>
-										<a href="#">Submenu</a>
-										<ul>
-											<li><a href="#">Option One</a></li>
-											<li><a href="#">Option Two</a></li>
-											<li><a href="#">Option Three</a></li>
-											<li><a href="#">Option Four</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
                          <a href="{% url 'pinax_messages:inbox' %}"><i class="fa fa-envelope"></i> {% trans "Message Inbox" %}</a>
                             {%  if user.is_authenticated %}
                             <li> <a href="{% url 'accounts:logout' %}" class="button">Logout</a></li>
@@ -60,7 +42,7 @@
 					<p>ONLINE TRADING PORTAL</p>
 					<ul class="actions special">
                         {%  if user.is_authenticated %}
-                            <li><a href="{% url 'accounts:register' %}" class="button primary">Post AD</a></li>
+                            <li><a href="{% url 'create_post' %}" class="button primary">Post AD</a></li>
                         {% else %}
 						<li><a href="{% url 'accounts:register' %}" class="button primary">Sign Up</a></li>
                         {% endif %}

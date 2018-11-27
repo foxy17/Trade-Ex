@@ -1,13 +1,49 @@
+{% load static crispy_forms_filters i18n%}
+ <head><link href="{% static '/assets/css/main.css' %}" rel="stylesheet"></head>
+
+<style> .a1 {
+          font-weight: bold;
+           font-family: "Times New Roman", Times, serif;
+          font-variant: titling-caps;
+             font-style: italic;
+    font-size: 20px;
+    font-feature-settings: normal;
+
+}
+    body {
+    color: red;
+}
+</style>
+	<body class="landing is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header" class="alt">
+					<h1><a href="{% url 'accounts:index' %}">TRADE-EX</a></h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="{% url 'accounts:index' %}">Home</a></li>
+                            <li><a href="{% url 'index' %}">Products  </a></li>
+                        <li><a href="{% url 'notes:home' %}">View Notes </a></li>
+                        {%  if user.is_authenticated %}
+                            <li> <a href="{% url 'accounts:logout' %}" class="button">Logout</a></li>{% endif %}
+						</ul>
+					</nav>
+				</header>
+
+<section id="banner">
+
 {% for thread in threads %}
-    Message from  {{  thread.latest_message.sender}}
+    Message from User:  <a1><font color="#ff8080">{{thread.latest_message.sender }}</font></a1>
     <div class="chat-box">
    subject : {{ thread.subject }}
         <div>message :{{ thread.latest_message.content|truncatewords:5 }} </div>
 </div>
-    <a href="{% url "pinax_messages:message_user_create" user_id=thread.latest_message.sender_id %}" class="btn btn-default">reply</a>
+    <a href="{% url "pinax_messages:message_user_create" user_id=thread.latest_message.sender_id %}" class="btn btn-default">reply</a><br>
 {% endfor %}
     <div>
 {% for message in threads.messages.all %}
     {{ message.sender }} -- {{ message.content }}
 {% endfor %}
-</div>
+  </div>
+</section>

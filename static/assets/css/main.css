@@ -3009,7 +3009,11 @@
 			#header .button:active {
 				background-color: rgba(153, 153, 153, 0.5);
 			}
-
+		#footer {
+   		 	position: fixed;
+   		 	bottom: 0;
+    		width: 100%;}
+}
 		#header .container {
 			position: relative;
 		}

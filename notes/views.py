@@ -31,7 +31,7 @@ def post_create(request):
 
             messages.success(request,
                              "Yeeew, check it out on the home page!")
-            return redirect('index')
+            return redirect('notes:index1')
         else:
             print(NoteForm.errors)
     else:

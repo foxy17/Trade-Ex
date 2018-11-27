@@ -21,7 +21,7 @@ urlpatterns = [
 
     re_path(r'^(?P<slug>[\w-]+)/$', post_detail, name='detail'),
     re_path(r'^(?P<slug>[\w-]+)/edit/$', post_update, name='update'),
-    re_path(r'^(?P<slug>[\w-]+)/delete/$', post_delete),
+    re_path(r'^(?P<slug>[\w-]+)/delete/$', post_delete,name='del'),
     ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

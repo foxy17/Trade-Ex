@@ -1,4 +1,41 @@
+{% load static crispy_forms_filters %}
+ <head><link href="{% static '/assets/css/main.css' %}" rel="stylesheet"></head>
+<style>
+body{
+    background-color: #1f1109;
+}
+
+.box {
+		background: #ffffff;
+		border-radius: 6px;
+		box-shadow: 0 2px 0 0 #fff;
+		margin: 5% 5% 2em 5%;
+		padding: 3em;
+	}
+
+.col {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+}
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)}
+    to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
+}
+</style>
+ <div class="box animate">
+    <div class="center">
 <form method ="post" class="modal-content" enctype="multipart/form-data" >
-{{ form }}
-    <button type="submit" class="signupbtn">Send</button>
-</form>
+<br>{{ form|crispy }}
+    <button type="submit" class="button">Send</button>
+</form></div></div>

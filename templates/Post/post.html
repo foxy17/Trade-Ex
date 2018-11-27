@@ -9,13 +9,20 @@
     
     </head>
     <style>
+      .a {
+          font-weight: bold;
+           font-family: "Times New Roman", Times, serif;
+          font-variant: small-caps;
+             font-style: oblique;
+    font-size: 20px;
+}
     body {
-    background-color: #1f1108 
+    background-color: #662C91
     }
         .box {
-		background: #1f1108;
+		background: #662C91;
 		border-radius: 6px;
-		box-shadow: 0 2px 0 0 #fff;
+		box-shadow: 0 2px 0 0 #662C91;
 		margin: 0 0 2em 0;
 		padding: 5em;
 	}
@@ -23,9 +30,9 @@
     margin: auto;
     width: 50%;
     border-radius: 25px;
-    border: 3px solid #1f1108;
+    border: 3px solid #ffffff;
     padding: 10px;
-     background-color: #EAE7DA;
+     background-color: #ffffff;
            
             
 }
@@ -48,18 +55,12 @@
         
         <!-- Header -->
 				<header id="header" class="alt">
-					<h1><a href={% url "accounts:index"  %}>TRADE-EX</a></h1>
+					<h1><a href="{% url "accounts:index"  %}">TRADE-EX</a></h1>
 					<nav id="nav">
 						<ul>
 							<li><a href="{% url "accounts:index" %}" >Home</a></li>
 							<li>
-								<a href="#" class="icon fa-angle-down">Layouts</a>
-								<ul>
-									<li><a href="generic.html">Generic</a></li>
-									<li><a href="contact.html">Contact</a></li>
-									
-									
-								</ul>
+
 							</li>
 							<li><a href="{% url "accounts:login" %}" class="button">Login</a></li>
 						</ul>
@@ -77,11 +78,29 @@
             <h2 class="head"><b>POST AN AD</b></h2>
 			<div>
 				<form method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {% for field in form %}
-                        {{ field.label }}
-					 {{ field|as_crispy_field }}
-                    {% endfor %}
+                    {% csrf_token %}<br>
+{#                    {% for field in form %}#}
+{#                        {% if field.label == 'Media' %}#}
+{##}
+{#                            <label class="button">#}
+{#                    Browse...#}
+{#                    <span id="uploaded-file-name" style="font-style: italic"></span>#}
+{#                    <input id="file-upload" type="file" name="file"#}
+{#                           onchange="$('#uploaded-file-info').text($('#file-upload')[0].value);" >#}
+{#                            </label><br>#}
+{##}
+{##}
+{#                        {% else %}#}
+
+
+                <dvi class="a"   >  {{ form|crispy}}</dvi>
+                            <br>
+
+					    {{ field }}
+                            <br>
+
+{#                        {% endif %}#}
+{#                    {% endfor %}#}
 
 					<br>
 
